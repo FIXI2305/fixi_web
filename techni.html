@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixi | Technicians</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3e2a56;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #3e2a56;
+    }
+
+    .btn {
+      background-color: #3e2a56;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #2f2044;
+    }
+
+    /* ---------- TECHNICIANS SECTION ---------- */
+    section {
+      padding: 3rem 2rem;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #3e2a56;
+      text-align: center;
+    }
+
+    section p {
+      color: #555;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .techs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tech-card {
+      display: flex;
+      gap: 1.5rem;
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      align-items: center;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-5px);
+      border-color: #3e2a56;
+      box-shadow: 0 4px 16px rgba(62, 42, 86, 0.15);
+    }
+
+    .tech-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #3e2a56;
+    }
+
+    .tech-info {
+      flex: 1;
+    }
+
+    .tech-info h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #3e2a56;
+      margin-bottom: 0.2rem;
+    }
+
+    .tech-info p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0.2rem 0;
+    }
+
+    .book-btn {
+      background-color: #3e2a56;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .book-btn:hover {
+      background-color: #2f2044;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+      .tech-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .tech-info {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ---------- NAVBAR ---------- -->
+  <nav>
+    <div class="logo">Fixi</div>
+    <div class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="#">How It Works</a>
+      <a href="#">Contact</a>
+      <a href="#" style="color: #3e2a56; font-weight: 600;">Login</a>
+      <button class="btn">Sign Up</button>
+    </div>
+  </nav>
+
+  <!-- ---------- TECHNICIANS SECTION ---------- -->
+  <section>
+    <h2>Available Technicians</h2>
+    <p>Select the best professional for your home service needs.</p>
+
+    <div class="techs-container" id="techsContainer">
+      <!-- Technician cards will be injected here -->
+    </div>
+  </section>
+
+  <script>
+    // Example data - replace with database/fetch API
+    const technicians = [
+      {
+        name: "Ravi Kumar",
+        location: "Koramangala, Bangalore",
+        service: "Electrician",
+        price: "₹500",
+        rating: 4.7,
+        distance: "2.1 km",
+        arrival: "30 mins",
+        img: "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      {
+        name: "Sita Sharma",
+        location: "HSR Layout, Bangalore",
+        service: "Plumber",
+        price: "₹400",
+        rating: 4.5,
+        distance: "3 km",
+        arrival: "25 mins",
+        img: "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      {
+        name: "Amit Singh",
+        location: "Indiranagar, Bangalore",
+        service: "Cleaning",
+        price: "₹600",
+        rating: 4.9,
+        distance: "1.8 km",
+        arrival: "20 mins",
+        img: "https://randomuser.me/api/portraits/men/65.jpg"
+      }
+    ];
+
+    const container = document.getElementById('techsContainer');
+
+    technicians.forEach(tech => {
+      const card = document.createElement('div');
+      card.className = 'tech-card';
+      card.innerHTML = `
+        <img src="${tech.img}" alt="${tech.name}" class="tech-img" />
+        <div class="tech-info">
+          <h3>${tech.name}</h3>
+          <p><strong>Service:</strong> ${tech.service}</p>
+          <p><strong>Location:</strong> ${tech.location}</p>
+          <p><strong>Price:</strong> ${tech.price}</p>
+          <p><strong>Rating:</strong> ${tech.rating} ⭐</p>
+          <p><strong>Distance:</strong> ${tech.distance}</p>
+          <p><strong>Arrival:</strong> ${tech.arrival}</p>
+        </div>
+        <button class="book-btn">Book Now</button>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

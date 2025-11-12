@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In / Sign Up</title>
+  <style>
+    :root {
+      --primary-color: #3e2a56;
+      --bg-light: #f9f9fb;
+      --text-dark: #333;
+      --text-muted: #777;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background-color: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background-color: #ede7f6;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-weight: bold;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .tab-btn.active {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .form-container {
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      background-color: #fff;
+    }
+
+    .field .icon {
+      margin-right: 0.6rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 1rem;
+      background-color: transparent;
+    }
+
+    .terms {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .terms a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .continue-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .continue-btn:hover {
+      background-color: #3e2a56;
+    }
+
+    .illustration {
+      background-color: #ede7f6;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .illustration img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .caption {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <button class="close-btn">✕</button>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showForm('signin')">Sign In</button>
+      <button class="tab-btn" onclick="showForm('signup')">Sign Up</button>
+    </div>
+
+    <section id="signin" class="form-section active form-container">
+      <h1>Welcome back!</h1>
+      <form>
+        <div class="field">
+          <label for="signin-email">
+            <span class="icon">📧</span>
+            <input type="email" id="signin-email" placeholder="Email" required />
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="signin-password">
+            <span class="icon">🔒</span>
+            <input type="password" id="signin-password" placeholder="Password" required />
+          </label>
+        </div>
+
+        <p class="terms">
+          By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </p>
+
+        <button type="submit" class="continue-btn">Continue</button>
+      </form>
+    </section>
+
+    <section id="signup" class="form-section form-container">
+      <h1>Create your account</h1>
+      <form>
+        <div class="field">
+          <label for="name">
+            <span class="icon">👤</span>
+            <input type="text" id="name" placeholder="Full Name" required />
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="signup-email">
+            <span class="icon">📧</span>
+            <input type="email" id="signup-email" placeholder="Email" required />
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="signup-password">
+            <span class="icon">🔒</span>
+            <input type="password" id="signup-password" placeholder="Password" required />
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="confirm">
+            <span class="icon">✅</span>
+            <input type="password" id="confirm" placeholder="Confirm Password" required />
+          </label>
+        </div>
+
+        <p class="terms">
+          By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </p>
+
+        <button type="submit" class="continue-btn">Create Account</button>
+      </form>
+    </section>
+
+    <section class="illustration">
+      <p class="caption">Fast.Realible.Fixi.</p>
+    </section>
+  </div>
+
+  <script>
+    function showForm(formId) {
+      document.querySelectorAll('.form-section').forEach(el => el.classList.remove('active'));
+      document.getElementById(formId).classList.add('active');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

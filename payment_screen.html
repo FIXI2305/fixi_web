@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fixi | Your Bookings</title>
+<style>
+  body{font-family:Poppins, sans-serif; background:#fafafa; padding:25px;}
+  h2{text-align:center; color:#3e2a56; margin-bottom:25px;}
+  .booking-card{
+    background:#fff; border:1px solid #e7e7e7; border-radius:12px;
+    padding:15px 18px; margin-bottom:12px; box-shadow:0 3px 8px rgba(0,0,0,0.04);
+  }
+  .booking-card p{margin:4px 0; color:#444;}
+  .pay-btn{
+    background:#3e2a56; color:#fff; padding:7px 14px; border:none;
+    border-radius:6px; cursor:pointer; margin-top:8px; font-size:0.9rem;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Your Bookings</h2>
+<div id="list"></div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+const container = document.getElementById("list");
+
+if(bookings.length === 0){
+  container.innerHTML = "<p style='text-align:center;color:#666;'>No bookings yet.</p>";
+}
+
+bookings.forEach((b,index)=>{
+  container.innerHTML += `
+    <div class="booking-card">
+      <p><b>Service:</b> ${b.service}</p>
+      <p><b>Technician:</b> ${b.technician}</p>
+      <p><b>Cost:</b> ${b.cost}</p>
+      <p><b>Status:</b> ${b.status}</p>
+      <button class="pay-btn" onclick="payNow(${index})">Pay Now</button>
+    </div>
+  `;
+});
+
+function payNow(i){
+  let amount = parseInt(bookings[i].cost.replace(/\D/g,''))*100;
+
+  let options = {
+    "key": "pragna1503@axl",
+    "amount": amount,
+    "currency": "INR",
+    "name": "Fixi Services",
+    "description": bookings[i].service,
+    "theme": { "color": "#3e2a56" },
+    "handler": function(response){
+      bookings[i].status = "Paid";
+      bookings[i].payment_id = response.razorpay_payment_id;
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      location.reload();
+    }
+  };
+
+  new Razorpay(options).open();
+}
+</script>
+
+</body>
+</html>

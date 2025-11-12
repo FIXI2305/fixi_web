@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixi | Booking Confirmed</title>
+
+  <style>
+    body{
+      font-family:Poppins, sans-serif;
+      background:#fafafa;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      padding:20px;
+    }
+    .box{
+      background:#fff;
+      padding:35px 30px;
+      border-radius:14px;
+      text-align:center;
+      width:100%;
+      max-width:420px;
+      box-shadow:0 4px 18px rgba(0,0,0,0.08);
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn{ from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+    h2{ color:#3e2a56; font-size:1.8rem; margin-bottom:10px; }
+    p{ color:#555; margin:6px 0; }
+    .success-icon{
+      font-size:55px;
+      color:#3e2a56;
+      margin-bottom:10px;
+    }
+    .btn{
+      margin-top:20px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      background:#3e2a56;
+      color:#fff;
+      cursor:pointer;
+      font-size:1rem;
+      transition:0.3s;
+    }
+    .btn:hover{ background:#2b1c3e; }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <div class="success-icon">✅</div>
+    <h2>Booking Confirmed</h2>
+    <p id="detail1"></p>
+    <p id="detail2"></p>
+    <p id="detail3" style="color:#3e2a56; font-weight:600;"></p>
+
+    <button class="btn" onclick="window.location.href='bookings.html'">
+      View All Bookings
+    </button>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const index = urlParams.get("booking");
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const b = bookings[index];
+
+    document.getElementById("detail1").innerHTML = "<b>Service:</b> " + b.service;
+    document.getElementById("detail2").innerHTML = "<b>Technician:</b> " + b.technician;
+    document.getElementById("detail3").innerHTML = "Payment ID: " + b.payment_id;
+  </script>
+
+</body>
+</html>

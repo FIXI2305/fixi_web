@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixi | Technicians</title>
+
+  <style>
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+    body{
+      background:#fafafa;
+      color:#222;
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 3rem;
+      background:#fff;
+      border-bottom:1px solid #eee;
+    }
+
+    .logo{
+      font-size:1.6rem;
+      font-weight:700;
+      color:#3e2a56;
+    }
+
+    .nav-links{ display:flex; gap:1.8rem; align-items:center; }
+    .nav-links a{ text-decoration:none; color:#444; font-size:0.95rem; transition:0.3s; }
+    .nav-links a:hover{ color:#3e2a56; }
+
+    section{
+      max-width:1000px;
+      margin:auto;
+      padding:2.5rem 1.5rem;
+    }
+
+    section h2{
+      text-align:center;
+      font-size:2rem;
+      font-weight:600;
+      color:#3e2a56;
+      margin-bottom:0.5rem;
+    }
+
+    section p{
+      text-align:center;
+      color:#666;
+      margin-bottom:2.5rem;
+      font-size:0.95rem;
+    }
+
+    .techs-container{
+      display:flex;
+      flex-direction:column;
+      gap:1.2rem;
+    }
+
+    .tech-card{
+      background:#fff;
+      border:1px solid #e7e7e7;
+      border-radius:12px;
+      padding:1.3rem;
+      display:flex;
+      align-items:center;
+      gap:1.3rem;
+      transition:0.3s ease;
+    }
+
+    .tech-card:hover{
+      box-shadow:0 4px 15px rgba(0,0,0,0.08);
+      transform:translateY(-3px);
+      border-color:#d9c8ef;
+    }
+
+    .tech-img{
+      width:85px;
+      height:85px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid #e6dcf5;
+    }
+
+    .tech-info h3{
+      margin-bottom:4px;
+      color:#3e2a56;
+      font-size:1.1rem;
+    }
+
+    .tech-info p{
+      font-size:0.9rem;
+      color:#555;
+      margin:2px 0;
+    }
+
+    .book-btn{
+      margin-left:auto;
+      background:#3e2a56;
+      color:#fff;
+      padding:0.55rem 1.2rem;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:0.9rem;
+      transition:0.3s;
+    }
+
+    .book-btn:hover{
+      background:#2d1f42;
+    }
+
+    @media(max-width:768px){
+      .tech-card{ flex-direction:column; text-align:center; }
+      .book-btn{ margin-left:0; width:100%; margin-top:0.7rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">Fixi</div>
+    <div class="nav-links">
+      <a href="services.html">Services</a>
+      <a href="#">How It Works</a>
+      <a href="#">Contact</a>
+      <a href="#" style="color:#3e2a56;font-weight:600;">Login</a>
+    </div>
+  </nav>
+
+  <section>
+    <h2>Available Technicians</h2>
+    <p>Choose a trusted professional near you.</p>
+
+    <div class="techs-container" id="techsContainer"></div>
+  </section>
+
+  <script>
+    const technicians = [
+      {
+        name:"Ravi Kumar",
+        location:"Koramangala, Bangalore",
+        service:"Electrician",
+        price:"₹500",
+        rating:4.7,
+        arrival:"30 mins",
+        img:"https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      {
+        name:"Sita Sharma",
+        location:"HSR Layout, Bangalore",
+        service:"Plumber",
+        price:"₹400",
+        rating:4.5,
+        arrival:"25 mins",
+        img:"https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      {
+        name:"Amit Singh",
+        location:"Indiranagar, Bangalore",
+        service:"Cleaning",
+        price:"₹600",
+        rating:4.9,
+        arrival:"20 mins",
+        img:"https://randomuser.me/api/portraits/men/65.jpg"
+      }
+    ];
+
+    const container = document.getElementById("techsContainer");
+
+    technicians.forEach(tech=>{
+      container.innerHTML+=`
+        <div class="tech-card">
+          <img src="${tech.img}" class="tech-img">
+          <div class="tech-info">
+            <h3>${tech.name}</h3>
+            <p>${tech.service} • ${tech.price}</p>
+            <p>${tech.location}</p>
+            <p>⭐ ${tech.rating} • ETA ${tech.arrival}</p>
+          </div>
+          <button class="book-btn" onclick="bookService('${tech.service}', '${tech.name}', '${tech.price}')">Book Now</button>
+        </div>
+      `;
+    });
+
+    function bookService(serviceName, technicianName, price){
+      let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+      bookings.push({ service:serviceName, technician:technicianName, cost:price, date:new Date().toLocaleString() });
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      window.location.href = "bookings.html";
+    }
+  </script>
+
+</body>
+</html>
